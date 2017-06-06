@@ -8,6 +8,7 @@
     "aframe-extras": "^3.8.3",
     "aframe-particle-system-component": "^1.0.8",
     "aframe-react": "^4.0.x",
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.3.14",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
