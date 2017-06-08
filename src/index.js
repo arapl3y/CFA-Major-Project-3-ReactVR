@@ -8,6 +8,10 @@ import { Entity, Scene } from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const origin = window.location.port
+  ? "http://localhost:3000"
+  : "//mighty-thicket-40847.herokuapp.com";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +25,7 @@ class App extends React.Component {
   }
 
   getImageIds() {
-    axios.get(`//mighty-thicket-40847.herokuapp.com/api/images/${window.location.search}`)
+    axios.get(`${origin}/api/images/${window.location.search}`)
       .then((images) => {
         this.setState({ imageIds: images.data });
         console.log(this.state.imageIds)
@@ -33,6 +37,8 @@ class App extends React.Component {
 
 
   render () {
+
+
     return (
 
         <Scene>
@@ -43,11 +49,11 @@ class App extends React.Component {
 
 
             {this.state.imageIds.map((image, i) =>
-              <img id={`image${i}`} alt="painting" key={i} src={`//mighty-thicket-40847.herokuapp.com/images/${image.id}`} />
+              <img id={`image${i}`} alt="painting" key={i} src={`${origin}/images/${image.id}`} />
             )}
 
-            <img id="groundTexture" alt="ground" src="//cdn.aframe.io/a-painter/images/floor.jpg" />
-            <img id="skyTexture" alt="sky" src="//cdn.aframe.io/a-painter/images/sky.jpg" />
+            <img id="groundTexture" alt="ground" src="/assets/floor.jpg" />
+            <img id="skyTexture" alt="sky" src="/assets/sky.jpg" />
           </a-assets>
 
 
