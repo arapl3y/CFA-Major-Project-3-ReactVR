@@ -1,5 +1,5 @@
 {
-  "name": "Virtual Gallery",
+  "name": "virtualgallery",
   "version": "3.0.1",
   "description": "Virtual Reality gallery for viewing art",
   "dependencies": {
