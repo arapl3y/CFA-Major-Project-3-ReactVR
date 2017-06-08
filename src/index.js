@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   getImageIds() {
-    axios.get(`http://localhost:3000/api/images/${window.location.search}`)
+    axios.get(`//mighty-thicket-40847.herokuapp.com/api/images/${window.location.search}`)
       .then((images) => {
         this.setState({ imageIds: images.data });
         console.log(this.state.imageIds)
@@ -43,7 +43,7 @@ class App extends React.Component {
 
 
             {this.state.imageIds.map((image, i) =>
-              <img id={`test${i}`} alt="painting" key={i} src={`http://localhost:3000/images/${image.id}`} />
+              <img id={`image${i}`} alt="painting" key={i} src={`//mighty-thicket-40847.herokuapp.com/images/${image.id}`} />
             )}
 
             <img id="groundTexture" alt="ground" src="//cdn.aframe.io/a-painter/images/floor.jpg" />
@@ -55,10 +55,10 @@ class App extends React.Component {
           <Entity primitive="a-obj-model" src="#gallery-obj" mtl="#gallery-mtl" />
 
 
-          <Entity primitive="a-box" position="0 1.5 -4" width="2.5" height="2" depth="0.1" src="#test0" />
-          <Entity primitive="a-box" position="-4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src="#test1" />
-          <Entity primitive="a-box" position="4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src="#test2" />
-          <Entity primitive="a-box" position="0 1.5 4" width="2.5" height="2" depth="0.09" src="#test3" />
+          <Entity primitive="a-box" position="0 1.5 -4" width="2.5" height="2" depth="0.1" src="#image0" />
+          <Entity primitive="a-box" position="-4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src="#image1" />
+          <Entity primitive="a-box" position="4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src="#image2" />
+          <Entity primitive="a-box" position="0 1.5 4" width="2.5" height="2" depth="0.09" src="#image3" />
 
 
           <Entity primitive="a-plane" src="#groundTexture" rotation="-90 0 0" height="100" width="100"/>
