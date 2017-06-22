@@ -16,18 +16,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageIds: []
+      imageIds: [],
+      loading: true
     };
   }
 
   componentDidMount() {
-    this.getImageIds()
+    this.getImageIds();
+    console.log(this.state.ImageIds)
   }
 
   getImageIds() {
     axios.get(`${origin}/api/images/${window.location.search}`)
       .then((images) => {
-        this.setState({ imageIds: images.data });
+        this.setState({ imageIds: images.data, loading: false });
         console.log(this.state.imageIds)
       })
       .catch((err) => {
@@ -35,36 +37,31 @@ class App extends React.Component {
       });
   }
 
-
   render () {
-
-
     return (
-
+      !this.state.loading &&
         <Scene>
-          <a-assets>
 
+          <a-assets>
             <a-asset-item id="gallery-obj" src="assets/cavanagh.obj"></a-asset-item>
             <a-asset-item id="gallery-mtl" src="assets/cavanagh.mtl"></a-asset-item>
 
 
-            {this.state.imageIds.map((image, i) =>
+            {/* {this.state.images.map((image, i) =>
               <img id={`image${i}`} alt="painting" key={i} src={`${origin}/images/${image.id}`} />
-            )}
+            )} */}
 
             <img id="groundTexture" alt="ground" src="/assets/floor.jpg" />
             <img id="skyTexture" alt="sky" src="/assets/sky.jpg" />
           </a-assets>
 
 
-
           <Entity primitive="a-obj-model" src="#gallery-obj" mtl="#gallery-mtl" />
 
-
-          <Entity primitive="a-box" position="0 1.5 -4" width="2.5" height="2" depth="0.1" src="#image0" />
-          <Entity primitive="a-box" position="-4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src="#image1" />
-          <Entity primitive="a-box" position="4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src="#image2" />
-          <Entity primitive="a-box" position="0 1.5 4" width="2.5" height="2" depth="0.09" src="#image3" />
+          <Entity primitive="a-box" position="0 1.5 -4" width="2.5" height="2" depth="0.1" src={`${origin}/images/${this.state.imageIds[0].id}`} />
+          <Entity primitive="a-box" position="-4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src={`${origin}/images/${this.state.imageIds[1].id}`} />
+          <Entity primitive="a-box" position="4 1.5 0" rotation="0 90" width="2.5" height="2" depth="0.1" src={`${origin}/images/${this.state.imageIds[2].id}`} />
+          <Entity primitive="a-box" position="0 1.5 4" width="2.5" height="2" depth="0.1" src={`${origin}/images/${this.state.imageIds[3].id}`} />
 
 
           <Entity primitive="a-plane" src="#groundTexture" rotation="-90 0 0" height="100" width="100"/>
@@ -78,8 +75,10 @@ class App extends React.Component {
           <Entity primitive="a-camera">
             <Entity primitive="a-cursor" />
           </Entity>
-      </Scene>
-    );
+
+        </Scene>
+
+    )
   }
 }
 
